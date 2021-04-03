@@ -95,9 +95,11 @@ TidyModule <- R6::R6Class(
         if(!is.null(self$parent_mod) && is(self$parent_mod,"TidyModule"))
           break
       }
+      #browser()
       # case 3 : Dynamically created module in an observe function of server()
       if(is.null(self$parent_mod) || !is(self$parent_mod,"TidyModule"))
-        self$parent_mod<-parent.env(parent.env(parent.frame(3)))$self
+        #self$parent_mod<-parent.env(parent.env(parent.frame(3)))$self
+        self$parent_mod<-parent.env(parent.env(parent.env(parent.frame(3))))$self
       
       # At the end we save the parent ns & server arguments if any
       if(!is.null(self$parent_mod) && 
